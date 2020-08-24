@@ -1,0 +1,60 @@
+.songRow {
+  padding: 12px 0;
+  display: flex;
+  color: white;
+
+  .songRow__icon {
+    display: block;
+  }
+
+  .songRow__iconHover {
+    display: none;
+  }
+
+  &:hover {
+    cursor: default;
+    background-color: #ffffff1a;
+    transition: 200ms background-color ease-in;
+
+    .songRow__icon {
+      display: none;
+    }
+
+    .songRow__iconHover {
+      display: block;
+    }
+  }
+}
+
+.songRow.songRow__selected > .songRow__icon,
+.songRow.songRow__selected > .songRow__iconHover,
+.songRow.songRow__selected > .songRow__info > h1 {
+  color: #1ed760;
+}
+
+.songRow__icon {
+  padding: 0 0.2em;
+  color: #b3b3b3;
+  opacity: 0.6;
+}
+
+.songRow__iconHover {
+  padding: 0 0.2em;
+  color: white;
+}
+
+.songRow__info {
+  margin-left: 0.8em;
+}
+
+.songRow__info > h1 {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.songRow__info > p {
+  font-size: 14px;
+  margin-top: 3px;
+  color: gray;
+  font-weight: 500;
+}
