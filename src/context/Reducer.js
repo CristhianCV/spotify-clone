@@ -5,6 +5,7 @@ export const initialState = {
   current_track: null,
   current_audio: null,
   is_playing: false,
+  token: null,
 };
 
 const reducer = (state, action) => {
