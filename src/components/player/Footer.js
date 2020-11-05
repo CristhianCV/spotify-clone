@@ -1,13 +1,21 @@
 import React, { useState, useEffect } from "react";
 import "./Footer.css";
+
 import PlayCircleOutlineIcon from "@material-ui/icons/PlayCircleOutline";
 import PauseCircleOutline from "@material-ui/icons/PauseCircleOutline";
 import SkipPreviousIcon from "@material-ui/icons/SkipPrevious";
 import SkipNextIcon from "@material-ui/icons/SkipNext";
 import ShuffleIcon from "@material-ui/icons/Shuffle";
 import RepeatIcon from "@material-ui/icons/Repeat";
-import VolumeDownIcon from "@material-ui/icons/VolumeDown";
+import VolumeDownOutlinedIcon from "@material-ui/icons/VolumeDownOutlined";
+import VolumeUpOutlinedIcon from "@material-ui/icons/VolumeUpOutlined";
+import VolumeOffOutlinedIcon from "@material-ui/icons/VolumeOffOutlined";
+import FavoriteBorder from "@material-ui/icons/FavoriteBorder";
+import BrandingWatermarkOutlinedIcon from "@material-ui/icons/BrandingWatermarkOutlined";
+import DevicesIcon from "@material-ui/icons/Devices";
 import PlaylistPlayIcon from "@material-ui/icons/PlaylistPlay";
+import MicNoneIcon from "@material-ui/icons/MicNone";
+
 import { Grid, Slider } from "@material-ui/core";
 import { useDataLayerValue } from "../../context/DataLayer";
 
@@ -28,19 +36,23 @@ function Footer() {
     });
   };
 
+  const playCurrentAudio = (isPlayingAudio) => {
+    current_audio
+      .play()
+      .then((response) => {
+        setIsPlayingAudio(isPlayingAudio);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   const onClickPlayTrackHandler = () => {
     if (isPlaying) {
       current_audio.pause();
       setIsPlayingAudio(false);
     } else {
-      current_audio
-        .play()
-        .then((response) => {
-          setIsPlayingAudio(true);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      playCurrentAudio(true);
     }
   };
 
@@ -113,14 +125,7 @@ function Footer() {
       !current_audio.ontimeupdate
     ) {
       current_audio.ontimeupdate = tick;
-      current_audio
-        .play()
-        .then((response) => {
-          setIsPlayingAudio(true);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      playCurrentAudio(true);
 
       return () => {
         current_audio.ontimeupdate = null;
@@ -143,11 +148,20 @@ function Footer() {
           <h4>{current_track?.name}</h4>
           <p>{current_track?.artists.map((artist) => artist.name).join(",")}</p>
         </div>
+        <FavoriteBorder
+          fontSize="small"
+          className="footer__icon"
+        ></FavoriteBorder>
+        <BrandingWatermarkOutlinedIcon
+          fontSize="small"
+          className="footer__icon"
+        ></BrandingWatermarkOutlinedIcon>
       </div>
       <div className="footer__center">
         <div className="footer__controls">
-          <ShuffleIcon className="footer__icon"></ShuffleIcon>
+          <ShuffleIcon fontSize="small" className="footer__icon"></ShuffleIcon>
           <SkipPreviousIcon
+            fontSize="small"
             onClick={onClickPreviousHandler}
             className="footer__icon"
           ></SkipPreviousIcon>
@@ -165,10 +179,11 @@ function Footer() {
             ></PlayCircleOutlineIcon>
           )}
           <SkipNextIcon
+            fontSize="small"
             onClick={onClickNextHandler}
             className="footer__icon"
           ></SkipNextIcon>
-          <RepeatIcon className="footer__icon"></RepeatIcon>
+          <RepeatIcon fontSize="small" className="footer__icon"></RepeatIcon>
         </div>
         <div className="footer__playback">
           <Grid container spacing={2}>
@@ -199,22 +214,34 @@ function Footer() {
         </div>
       </div>
       <div className="footer__right">
-        <Grid container spacing={2}>
-          <Grid item>
-            <PlaylistPlayIcon className="footer__icon"></PlaylistPlayIcon>
-          </Grid>
-          <Grid item>
-            <VolumeDownIcon className="footer__icon"></VolumeDownIcon>
-          </Grid>
-          <Grid item xs>
-            <Slider
-              min={0}
-              max={100}
-              value={volume}
-              onChange={onChangeVolumeHandler}
-            ></Slider>
-          </Grid>
-        </Grid>
+        <MicNoneIcon fontSize="small" className="footer__icon"></MicNoneIcon>
+        <PlaylistPlayIcon
+          fontSize="small"
+          className="footer__icon"
+        ></PlaylistPlayIcon>
+        <DevicesIcon fontSize="small" className="footer__icon"></DevicesIcon>
+        {volume === 0 ? (
+          <VolumeOffOutlinedIcon
+            fontSize="small"
+            className="footer__icon"
+          ></VolumeOffOutlinedIcon>
+        ) : volume > 50 ? (
+          <VolumeUpOutlinedIcon
+            fontSize="small"
+            className="footer__icon"
+          ></VolumeUpOutlinedIcon>
+        ) : (
+          <VolumeDownOutlinedIcon
+            fontSize="small"
+            className="footer__icon"
+          ></VolumeDownOutlinedIcon>
+        )}
+        <Slider
+          min={0}
+          max={100}
+          value={volume}
+          onChange={onChangeVolumeHandler}
+        ></Slider>
       </div>
     </div>
   );

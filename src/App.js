@@ -38,15 +38,21 @@ function App() {
           type: "SET_CURRENT_PLAYLIST",
           current_playlist: response,
         });
-      });
-      spotify.getTrack("0QBgBYJGKbQ94uBKStszv0").then((track) => {
-        dispatch({
-          type: "SET_CURRENT_TRACK",
-          current_track: track,
-        });
-        dispatch({
-          type: "SET_CURRENT_AUDIO",
-          current_audio: new Audio(track.preview_url),
+
+        const defaultTrack = response.tracks.items.find(
+          (element) =>
+            element.track.preview_url && element.track.preview_url !== ""
+        );
+
+        spotify.getTrack(defaultTrack.track.id).then((track) => {
+          dispatch({
+            type: "SET_CURRENT_TRACK",
+            current_track: track,
+          });
+          dispatch({
+            type: "SET_CURRENT_AUDIO",
+            current_audio: new Audio(track.preview_url),
+          });
         });
       });
     }

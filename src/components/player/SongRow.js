@@ -27,7 +27,7 @@ function SongRow({ track = "test" }) {
   };
 
   let icons;
-  if (track.id === current_track.id && is_playing) {
+  if (track.id === current_track?.id && is_playing) {
     icons = (
       <>
         <VolumeUp className="songRow__icon"></VolumeUp>
@@ -46,7 +46,7 @@ function SongRow({ track = "test" }) {
   return (
     <div
       className={`songRow ${
-        track.id === current_track.id ? "songRow__selected" : ""
+        track.id === current_track?.id ? "songRow__selected" : ""
       }`}
       onClick={onClickPlayHandle}
     >
