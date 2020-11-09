@@ -21,15 +21,13 @@ import { useDataLayerValue } from "../../context/DataLayer";
 
 function Footer() {
   const [
-    { current_playlist, current_track, current_audio },
+    { current_playlist, current_track, current_audio, is_playing },
     dispatch,
   ] = useDataLayerValue();
-  const [isPlaying, setIsPlaying] = useState(false);
   const [elapsedTime, setElapsedTime] = useState(0);
   const [volume, setVolume] = useState(100);
 
   const setIsPlayingAudio = (isPlayingAudio) => {
-    setIsPlaying(isPlayingAudio);
     dispatch({
       type: "SET_IS_PLAYING",
       is_playing: isPlayingAudio,
@@ -48,7 +46,7 @@ function Footer() {
   };
 
   const onClickPlayTrackHandler = () => {
-    if (isPlaying) {
+    if (is_playing) {
       current_audio.pause();
       setIsPlayingAudio(false);
     } else {
@@ -126,6 +124,7 @@ function Footer() {
     ) {
       current_audio.ontimeupdate = tick;
       playCurrentAudio(true);
+      current_audio.volume = volume / 100;
 
       return () => {
         current_audio.ontimeupdate = null;
@@ -165,7 +164,7 @@ function Footer() {
             onClick={onClickPreviousHandler}
             className="footer__icon"
           ></SkipPreviousIcon>
-          {isPlaying ? (
+          {is_playing ? (
             <PauseCircleOutline
               fontSize="large"
               className="footer__iconScale"

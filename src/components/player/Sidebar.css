@@ -1,14 +1,12 @@
 .sidebar {
   color: white;
   width: 232px;
-  min-width: 232px;
   background-color: #040404;
 }
 
 .sidebar__logo {
   height: 64px;
   padding: 10px 10px 10px 14px;
-  margin-right: auto;
 }
 
 .sidebar__playlists {

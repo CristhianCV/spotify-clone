@@ -1,7 +1,14 @@
 .songRow {
-  padding: 12px 0;
-  display: flex;
-  color: white;
+  padding: 7px 16px;
+  display: grid;
+  color: #b3b3b3;
+  grid-template-columns: [index] 20px [title] 6fr [album] 4fr [time] 3fr [duration] minmax(
+      110px,
+      1fr
+    );
+  grid-gap: 16px;
+  align-items: center;
+  border-radius: 4px;
 
   .songRow__icon {
     display: block;
@@ -11,10 +18,14 @@
     display: none;
   }
 
+  .songRow__options > .MuiSvgIcon-root:last-child {
+    opacity: 0;
+  }
+
   &:hover {
     cursor: default;
     background-color: #ffffff1a;
-    transition: 200ms background-color ease-in;
+    color: white;
 
     .songRow__icon {
       display: none;
@@ -23,38 +34,87 @@
     .songRow__iconHover {
       display: block;
     }
+
+    .songRow__options > .MuiSvgIcon-root:last-child {
+      opacity: 1;
+    }
   }
 }
 
-.songRow.songRow__selected > .songRow__icon,
-.songRow.songRow__selected > .songRow__iconHover,
-.songRow.songRow__selected > .songRow__info > h1 {
-  color: #1ed760;
+.songRow > div {
+  min-width: 10px;
 }
 
-.songRow__icon {
-  padding: 0 0.2em;
-  color: #b3b3b3;
-  opacity: 0.6;
-}
-
-.songRow__iconHover {
-  padding: 0 0.2em;
-  color: white;
-}
-
-.songRow__info {
-  margin-left: 0.8em;
-}
-
-.songRow__info > h1 {
-  font-size: 15px;
+.songRow > div:first-child > span {
+  text-align: center;
   font-weight: 600;
 }
 
-.songRow__info > p {
-  font-size: 14px;
-  margin-top: 3px;
-  color: gray;
+.songRow > div > span {
   font-weight: 500;
+  font-size: 13px;
+}
+
+.songRow.songRow__selected {
+  background-color: #ffffff1a;
+  color: white;
+}
+
+.songRow.songRow__selected > div > .songRow__icon,
+.songRow.songRow__selected > div > .songRow__iconHover,
+.songRow.songRow__selected > .songRow__info > div > h1 {
+  color: #1ed760;
+}
+
+.MuiSvgIcon-root.songRow__icon,
+.MuiSvgIcon-root.songRow__iconHover {
+  font-size: 20px;
+}
+
+img.songRow__icon {
+  width: 20px;
+  height: 20px;
+  margin: auto;
+  object-fit: cover;
+}
+
+.songRow__info {
+  display: flex;
+  align-items: center;
+}
+
+.songRow__info > img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  margin-right: 16px;
+}
+
+.songRow__info > div {
+  min-width: 10px;
+}
+
+.songRow__info > div > h1 {
+  font-size: 15px;
+  font-weight: 600;
+  color: white;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.songRow__info > div > p,
+.songRow > div > p {
+  font-weight: 500;
+  font-size: 13px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.songRow__options {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  justify-content: flex-end;
 }

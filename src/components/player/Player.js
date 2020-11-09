@@ -8,7 +8,7 @@ function Player({ spotify }) {
   return (
     <div className="player">
       <Sidebar></Sidebar>
-      <Body spotify={spotify}></Body>
+      <Body></Body>
       <Footer></Footer>
     </div>
   );
