@@ -47,7 +47,7 @@ function Body({ spotify }) {
             <div>
               <span>ÁLBUM</span>
             </div>
-            <div>
+            <div className="body__headerAdded">
               <span>AGREGADO EL</span>
             </div>
             <div>

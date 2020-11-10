@@ -143,3 +143,21 @@
   font-size: 17px;
   color: #b3b3b3;
 }
+
+@media (max-width: 992px) {
+  .body__listHeader {
+    grid-template-columns: [index] 20px [first] 4fr [var1] 2fr [last] minmax(
+        110px,
+        1fr
+      );
+  }
+  .body__headerAdded {
+    display: none;
+  }
+}
+
+@media (max-width: 1024px) {
+  .body__list {
+    padding: 0 16px 32px 16px;
+  }
+}

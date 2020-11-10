@@ -97,7 +97,7 @@ function SongRow({ track = "test", index }) {
       <div>
         <p>{track.album.name}</p>
       </div>
-      <div>
+      <div className="songRow__added">
         <span>5 de noviembre de 2020</span>
       </div>
       <div className="songRow__options">

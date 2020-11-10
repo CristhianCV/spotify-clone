@@ -118,3 +118,15 @@ img.songRow__icon {
   gap: 16px;
   justify-content: flex-end;
 }
+
+@media (max-width: 992px) {
+  .songRow {
+    grid-template-columns: [index] 20px [first] 4fr [var1] 2fr [last] minmax(
+        110px,
+        1fr
+      );
+  }
+  .songRow__added {
+    display: none;
+  }
+}
