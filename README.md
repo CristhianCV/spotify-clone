@@ -1,4 +1,4 @@
-# SPOTIFY CLONE 🎶🎧
+# Spotify Clone 🎶🎧
 
 Clone of Spotify Web Player.
 
